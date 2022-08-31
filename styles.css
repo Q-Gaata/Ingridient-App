@@ -163,12 +163,13 @@ body{
     display: block;
 }
 
-.show-else {
+.notfound {
     color: var(--tenne-tawny);
     font-size: 28px;
     font-weight: bold;
-    padding-left: 500px;
-    text-align: center;
+    grid-template-columns: 1fr!important;
+    width: 100%;
+
 }
 
 .recipe-close-btn {

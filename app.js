@@ -4,6 +4,7 @@ const recipeBtn = document.querySelector('.recipe-btn');
 const closeBtn = document.querySelector('.recipe-close-btn');
 const mealDetail = document.querySelector('.meal-details-content');
 const input = document.querySelector('.search-content');
+const parentmeal = document.querySelector('.meal-details')
 
 searchBtn.addEventListener('click', getMealList);
 
@@ -13,6 +14,9 @@ input.addEventListener('keypress', (e) => {
         searchBtn.click()
     }
 })
+
+mealList.addEventListener('click', openMealdetails);
+closeBtn.addEventListener('click', closeParent)
 
 function getMealList(){
 
@@ -26,7 +30,7 @@ function getMealList(){
         if(data.meals){
             data.meals.forEach(meal => {
                 body += `
-                <div class="meal-item" id = "${meal.idMeal}">
+                <div class="meal-item" data-id = "${meal.idMeal}">
                     <div class="meal-img">
                         <img src="${meal.strMealThumb}" alt="">
                     </div>
@@ -37,18 +41,55 @@ function getMealList(){
                 </div>
                 `
             });
+            mealList.classList.remove('notfound')
         } else {
-            body += "Result not found!"
-            
-            mealList.innerHTML = body
-            mealList.classList.add('show-else')
-
-    
+            body = 'Ingridient not found!'
+            mealList.classList.add('notfound')
         }
 
         mealList.innerHTML = body;
     })
 }
+
+function openMealdetails(event){
+    event.preventDefault();
+    if(event.target.classList.contains('recipe-btn')){
+        parentmeal.classList.add('showRecipe')
+    }
+}
+
+function closeParent(){
+    parentmeal.classList.remove('showRecipe')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //// Promise
 
