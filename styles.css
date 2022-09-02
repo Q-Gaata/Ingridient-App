@@ -263,3 +263,26 @@ body{
         gap: 2rem;
     }
 }
+
+@media screen and (max-width: 400px){
+    .title{
+        font-size: 25px;
+    }
+    blockquote{
+        font-size: 17px;
+        padding-top: 10px;
+    }
+
+    .meal-search-box {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        
+    }
+
+    .search-btn{
+        width: 40px;
+        height: 40px;
+    }
+}

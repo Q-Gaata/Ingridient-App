@@ -4,7 +4,7 @@ const recipeBtn = document.querySelector('.recipe-btn');
 const closeBtn = document.querySelector('.recipe-close-btn');
 const mealDetail = document.querySelector('.meal-details-content');
 const input = document.querySelector('.search-content');
-const parentmeal = document.querySelector('.meal-details')
+
 
 searchBtn.addEventListener('click', getMealList);
 
@@ -16,11 +16,15 @@ input.addEventListener('keypress', (e) => {
 })
 
 mealList.addEventListener('click', openMealdetails);
-closeBtn.addEventListener('click', closeParent)
+closeBtn.addEventListener('click', () => {
+    mealDetail.parentElement.classList.remove('showRecipe')
+})
+
 
 function getMealList(){
 
-    document.querySelector('.result-title').style.display = 'block'
+   
+    
 
     let searchInput = document.querySelector('.search-content').value.trim();
     fetch(`https://themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`)
@@ -28,6 +32,10 @@ function getMealList(){
     .then(data => {
         let body = ""
         if(data.meals){
+            setTimeout(() => {
+                document.querySelector('.result-title').style.display = 'block'
+            }, 1000)
+
             data.meals.forEach(meal => {
                 body += `
                 <div class="meal-item" data-id = "${meal.idMeal}">
@@ -43,6 +51,7 @@ function getMealList(){
             });
             mealList.classList.remove('notfound')
         } else {
+            document.querySelector('.result-title').style.display = 'block'
             body = 'Ingridient not found!'
             mealList.classList.add('notfound')
         }
@@ -54,13 +63,35 @@ function getMealList(){
 function openMealdetails(event){
     event.preventDefault();
     if(event.target.classList.contains('recipe-btn')){
-        parentmeal.classList.add('showRecipe')
+        let mealitem = event.target.parentElement.parentElement
+         fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealitem.dataset.id}`)
+        .then(response => response.json())
+        .then(dataa => mealRecipeModal(dataa.meals))
     }
 }
 
-function closeParent(){
-    parentmeal.classList.remove('showRecipe')
+function mealRecipeModal(meal){
+    console.log(meal)
+    meal = meal[0]
+
+    let html = `
+    <h2 class="recipe-title">${meal.strMeal}</h2>
+    <p class="recipe-category">${meal.strCategory}</p>
+    <div class="recipe-instruct">
+        <h3>Instructions:</h3>
+        <p>${meal.strInstructions}</p>
+    </div>
+    <div class="recipe-meal-img">
+        <img src="${meal.strMealThumb}" alt="">
+    </div>
+    <div class="recipe-link">
+        <a href="${meal.strYoutube}" target = "_blank">Watch video</a>
+    </div>
+    `;
+    mealDetail.innerHTML = html;
+    mealDetail.parentElement.classList.add('showRecipe')
 }
+
 
 
 
