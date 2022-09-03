@@ -266,7 +266,8 @@ body{
 
 @media screen and (max-width: 400px){
     .title{
-        font-size: 25px;
+        font-size: 26px;
+        margin-bottom: 10px;
     }
     blockquote{
         font-size: 17px;
@@ -285,4 +286,24 @@ body{
         width: 40px;
         height: 40px;
     }
+
+    .result-title {
+        font-size: 20px;
+    }
+
+    #meal {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    #meal .meal-name h3 {
+        font-size: 1rem;
+    }
+
+    #meal .recipe-btn {
+        padding: 0.5rem;
+    }
+
+
 }

@@ -92,7 +92,11 @@ function mealRecipeModal(meal){
     mealDetail.parentElement.classList.add('showRecipe')
 }
 
+function focusInput(){
+    input.focus()
+}
 
+focusInput()
 
 
 
