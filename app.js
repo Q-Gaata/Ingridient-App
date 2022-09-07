@@ -6,6 +6,7 @@ const mealDetail = document.querySelector('.meal-details-content');
 const input = document.querySelector('.search-content');
 
 
+
 searchBtn.addEventListener('click', getMealList);
 
 input.addEventListener('keypress', (e) => {

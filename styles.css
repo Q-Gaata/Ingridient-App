@@ -16,6 +16,17 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+
+.huge{
+    font-size: 2rem;
+    color: white;
+    background-color: coral;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+}
+
+
 .btn{
     font-family: inherit;
     font-size: 1.5rem;
@@ -304,6 +315,12 @@ body{
     #meal .recipe-btn {
         padding: 0.5rem;
     }
+
+    .meal-details {
+        height: 50%;
+        width: 70%;
+    }
+    
 
 
 }
