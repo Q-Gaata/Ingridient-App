@@ -4,7 +4,8 @@ const recipeBtn = document.querySelector('.recipe-btn');
 const closeBtn = document.querySelector('.recipe-close-btn');
 const mealDetail = document.querySelector('.meal-details-content');
 const input = document.querySelector('.search-content');
-
+const overlay =  document.querySelector('.overlay')
+const showOnload = document.querySelector('.meal-search')
 
 
 searchBtn.addEventListener('click', getMealList);
@@ -19,6 +20,7 @@ input.addEventListener('keypress', (e) => {
 mealList.addEventListener('click', openMealdetails);
 closeBtn.addEventListener('click', () => {
     mealDetail.parentElement.classList.remove('showRecipe')
+    overlay.classList.add('hidden')
 })
 
 
@@ -64,10 +66,13 @@ function getMealList(){
 function openMealdetails(event){
     event.preventDefault();
     if(event.target.classList.contains('recipe-btn')){
+        
         let mealitem = event.target.parentElement.parentElement
          fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealitem.dataset.id}`)
         .then(response => response.json())
         .then(dataa => mealRecipeModal(dataa.meals))
+
+        overlay.classList.remove('hidden')
     }
 }
 
